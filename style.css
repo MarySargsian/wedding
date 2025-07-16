@@ -2,17 +2,24 @@ body {
   margin: 0;
   font-family: "Noto Sans Armenian", sans-serif;
   background-color: #fbeee0;
-  text-align: center;
+  text-align: center; /* This centers inline content, but not block elements unless they have margin: auto */
   overflow-x: hidden;
 }
 
 #stage {
   position: relative;
   padding-top: 50px;
+  /* Add display: flex and justify-content for stage to center its direct children, or use margin: auto on the envelope itself */
+  display: flex; /* Makes the container a flexbox */
+  flex-direction: column; /* Stacks children vertically */
+  align-items: center; /* Centers children horizontally in a column layout */
+  justify-content: center; /* Centers children vertically if there's extra space, not strictly needed for horizontal */
 }
 
 #envelope {
   width: 300px;
+  display: block; /* Important for margin: auto to work */
+  margin: 0 auto; /* This centers the envelope image horizontally */
 }
 
 #open-btn {
@@ -30,22 +37,33 @@ body {
   display: none;
 }
 
+#opened-envelope {
+    /* Make this a flex container to center its child image */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Keep existing top margin */
+}
+
 #opened-envelope img {
   width: 320px;
-  margin-top: 20px;
+  /* margin-top: 20px; -- This was already handled by the parent #opened-envelope margin-top */
+  /* display: block; -- Already effectively block due to flex container */
+  /* margin: 0 auto; -- Not needed if parent is flex and justified center */
 }
+
 
 #letter-container {
   position: relative;
   margin-top: 20px;
   animation: slideUp 2.5s ease-out forwards;
+  /* Ensure this container also centers its content if needed, though letter1/letter2 already have margin: auto */
 }
 
 #letter1, #letter2 {
   width: 90%;
   max-width: 600px;
   display: block;
-  margin: 30px auto;
+  margin: 30px auto; /* This correctly centers letter1 and letter2 */
 }
 
 @keyframes slideUp {
